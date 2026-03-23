@@ -25,7 +25,7 @@ from pathlib import Path
 import pytest
 
 from airflow.sdk import task
-from airflow.sdk.bases.decorator import DecoratedOperator, is_async_callable
+from airflow.sdk.bases.decorator import KNOWN_CONTEXT_KEYS, DecoratedOperator, is_async_callable
 
 RAW_CODE = """
 from airflow.sdk import task
@@ -117,15 +117,11 @@ class TestDefaultFillingLogic:
         assert make_op(foo, op_args=[None, None]) is not None
 
     def test_context_key_default_none_does_not_raise(self):
-        from airflow.sdk.bases.decorator import KNOWN_CONTEXT_KEYS
-
         ctx_key = next(iter(sorted(KNOWN_CONTEXT_KEYS)))
         f = _make_func(f"def dummy_task(x, {ctx_key}=None): return x")
         assert make_op(f, op_kwargs={"x": 1}) is not None
 
     def test_context_key_with_non_none_default_raises(self):
-        from airflow.sdk.bases.decorator import KNOWN_CONTEXT_KEYS
-
         ctx_key = next(iter(sorted(KNOWN_CONTEXT_KEYS)))
         f = _make_func(f"def dummy_task(x, {ctx_key}='bad_default'): return x")
         with pytest.raises(ValueError, match="can't have a default other than None"):
@@ -163,7 +159,6 @@ class TestDefaultFillingLogic:
     )
     def test_context_key_construction_succeeds(self, func_src, op_kwargs):
         """All context-key signature shapes must construct without raising."""
-        from airflow.sdk.bases.decorator import KNOWN_CONTEXT_KEYS
 
         ctx_keys = sorted(KNOWN_CONTEXT_KEYS)
         src = func_src.format(
@@ -175,15 +170,11 @@ class TestDefaultFillingLogic:
         assert op is not None
 
     def test_non_context_param_after_context_key_gets_none_injected(self):
-        from airflow.sdk.bases.decorator import KNOWN_CONTEXT_KEYS
-
         ctx_key = next(iter(sorted(KNOWN_CONTEXT_KEYS)))
         f = _make_func(f"def dummy_task({ctx_key}, a): ...")
         assert make_op(f, op_kwargs={"a": "2024-01-01"}) is not None
 
     def test_non_context_param_after_context_key_without_value_raises(self):
-        from airflow.sdk.bases.decorator import KNOWN_CONTEXT_KEYS
-
         ctx_key = next(iter(sorted(KNOWN_CONTEXT_KEYS)))
         f = _make_func(f"def dummy_task({ctx_key}, a): ...")
         with pytest.raises(TypeError, match="missing required argument"):
