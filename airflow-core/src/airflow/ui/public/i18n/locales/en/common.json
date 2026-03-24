@@ -172,6 +172,7 @@
   "reset": "Reset",
   "runId": "Run ID",
   "runTypes": {
+    "asset_materialization": "Asset Materialization",
     "asset_triggered": "Asset Triggered",
     "backfill": "Backfill",
     "manual": "Manual",
@@ -312,6 +313,10 @@
         "description": "{{resourceName}} has been successfully deleted.",
         "title": "Delete {{resourceName}} Request Submitted"
       }
+    },
+    "forbidden": {
+      "description": "You do not have permission to perform this action.",
+      "title": "Access Denied"
     },
     "import": {
       "error": "Import {{resourceName}} Request Failed",

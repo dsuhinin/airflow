@@ -23,6 +23,7 @@ Much of this code is expensive to import/load, be careful where this module is i
 from __future__ import annotations
 
 import contextlib
+import gc
 import logging
 import math
 import os
@@ -37,13 +38,12 @@ from typing import TYPE_CHECKING, Any
 from celery import Celery, states as celery_states
 from celery.backends.base import BaseKeyValueStoreBackend
 from celery.backends.database import DatabaseBackend, Task as TaskDb, retry, session_cleanup
-from celery.signals import import_modules as celery_import_modules
+from celery.signals import import_modules as celery_import_modules, worker_ready
 from sqlalchemy import select
 
-from airflow.configuration import AirflowConfigParser, conf
 from airflow.executors.base_executor import BaseExecutor
 from airflow.providers.celery.version_compat import AIRFLOW_V_3_0_PLUS, AIRFLOW_V_3_2_PLUS
-from airflow.providers.common.compat.sdk import AirflowException, AirflowTaskTimeout, Stats, timeout
+from airflow.providers.common.compat.sdk import AirflowException, AirflowTaskTimeout, Stats, conf, timeout
 from airflow.utils.log.logging_mixin import LoggingMixin
 from airflow.utils.net import get_hostname
 from airflow.utils.providers_configuration_loader import providers_configuration_loaded
@@ -51,7 +51,7 @@ from airflow.utils.providers_configuration_loader import providers_configuration
 try:
     from airflow.sdk.definitions._internal.dag_parsing_context import _airflow_parsing_context_manager
 except ImportError:
-    from airflow.utils.dag_parsing_context import _airflow_parsing_context_manager
+    from airflow.utils.dag_parsing_context import _airflow_parsing_context_manager  # type:ignore[no-redef]
 
 if AIRFLOW_V_3_2_PLUS:
     from airflow.executors.workloads.callback import execute_callback_workload
@@ -68,6 +68,7 @@ if TYPE_CHECKING:
 
     from celery.result import AsyncResult
 
+    from airflow.configuration import AirflowConfigParser
     from airflow.executors import workloads
     from airflow.executors.base_executor import EventBufferValueType, ExecutorConf
     from airflow.executors.workloads.types import WorkloadKey
@@ -174,6 +175,15 @@ def on_celery_import_modules(*args, **kwargs):
     with contextlib.suppress(ImportError):
         import kubernetes.client  # noqa: F401
 
+    # To prevent memory increase by COW in celery's ForkPoolWorker.
+    gc.freeze()
+
+
+@worker_ready.connect
+def on_celery_worker_ready(*args, **kwargs):
+    # Unfreeze the objects from gc freeze when the ForkPoolWorker is all loaded.
+    gc.unfreeze()
+
 
 # Once Celery 5.5 is out of beta, we can pass `pydantic=True` to the decorator and it will handle the validation
 # and deserialization for us
@@ -181,8 +191,8 @@ def on_celery_import_modules(*args, **kwargs):
 def execute_workload(input: str) -> None:
     from pydantic import TypeAdapter
 
-    from airflow.configuration import conf
     from airflow.executors import workloads
+    from airflow.providers.common.compat.sdk import conf
     from airflow.sdk.execution_time.supervisor import supervise
 
     decoder = TypeAdapter[workloads.All](workloads.All)
@@ -218,7 +228,7 @@ def execute_workload(input: str) -> None:
 
 if not AIRFLOW_V_3_0_PLUS:
 
-    @app.task
+    @app.task(name="execute_command")
     def execute_command(command_to_exec: CommandType) -> None:
         """Execute command."""
         EXECUTE_TASKS_NEW_PYTHON_INTERPRETER = not hasattr(os, "fork") or conf.getboolean(

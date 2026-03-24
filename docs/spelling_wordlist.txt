@@ -106,6 +106,7 @@ asyncio
 athena
 Atlassian
 atlassian
+atomicity
 attr
 attrs
 au
@@ -215,6 +216,7 @@ celltags
 centric
 cfg
 cgi
+cgitb
 chakra
 Changelog
 changelog
@@ -265,6 +267,7 @@ comparator
 compat
 Compute
 compute
+ComputeManagementClient
 Computenodes
 ComputeNodeState
 concat
@@ -284,6 +287,7 @@ conftest
 conn
 connectTimeoutMS
 connexion
+conns
 containerConfiguration
 containerd
 ContainerGroup
@@ -407,6 +411,9 @@ dbt
 dbutils
 ddl
 de
+deallocate
+deallocated
+Debounce
 debuggability
 declaratively
 decommissioning
@@ -482,6 +489,7 @@ Docstrings
 docstrings
 doesn
 doesnt
+dom
 Dont
 DownloadReportV
 downscaling
@@ -556,6 +564,7 @@ EnvVar
 envvar
 eof
 EOL
+equest
 errno
 errored
 eslint
@@ -578,6 +587,7 @@ exitcode
 expanduser
 explicit
 exportingmultiple
+Expr
 ext
 extensibility
 externalbrowser
@@ -929,6 +939,7 @@ len
 leq
 LevelDB
 leveldb
+lexicographically
 libs
 libz
 Lifecycle
@@ -1139,6 +1150,7 @@ Paramiko
 paramiko
 Params
 params
+parsers
 passwd
 pathlib
 pathType
@@ -1199,6 +1211,7 @@ preemptible
 prefetch
 prefetched
 prefetches
+preflight
 prek
 Preload
 prepend
@@ -1206,6 +1219,7 @@ prepended
 preprocess
 Preprocessed
 preprocessing
+preselected
 presign
 presigned
 prestodb
@@ -1216,6 +1230,7 @@ proc
 productionalize
 ProductSearchClient
 profiler
+Programmatic
 programmatically
 proj
 projectId
@@ -1291,6 +1306,7 @@ Realtime
 realtime
 rebase
 Rebasing
+Recency
 recurse
 redelivery
 Redhat
@@ -1324,6 +1340,7 @@ resetdb
 resizable
 ResourceRequirements
 resourceVersion
+responder
 reStructuredText
 resultset
 resumable
@@ -1393,6 +1410,7 @@ seealso
 seedlist
 seekable
 segmentGranularity
+selectable
 selectin
 Sendgrid
 sendgrid
@@ -1509,6 +1527,7 @@ StoredInfoType
 storedInfoType
 str
 Streamable
+strftime
 Stringified
 stringified
 Struct
