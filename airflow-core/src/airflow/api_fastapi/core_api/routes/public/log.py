@@ -62,7 +62,7 @@ ndjson_example_response_for_get_log = {
 }
 
 
-def _batched_ndjson_stream(
+def _buffered_ndjson_stream(
     raw_stream: Iterable[str],
 ) -> Generator[str, None, None]:
     buf: list[str] = []
@@ -161,8 +161,8 @@ def get_log(
             ti.task = dag.get_task(ti.task_id)
 
     if accept == Mimetype.NDJSON:
-        raw_stream = task_log_reader.read_log_stream(ti, try_number, metadata)
-        log_stream = _batched_ndjson_stream(raw_stream)
+        raw_stream = task_log_reader.read_log_stream(ti, try_number, metadata)  # type: ignore[arg-type]
+        log_stream = _buffered_ndjson_stream(raw_stream)
         headers = None
         if not metadata.get("end_of_log", False):
             headers = {
