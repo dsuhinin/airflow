@@ -36,12 +36,13 @@ from airflow.api_fastapi.common.types import Mimetype
 from airflow.api_fastapi.core_api.datamodels.log import ExternalLogUrlResponse, TaskInstancesLogResponse
 from airflow.api_fastapi.core_api.openapi.exceptions import create_openapi_http_exception_doc
 from airflow.api_fastapi.core_api.security import DagAccessEntity, requires_access_dag
+from airflow.configuration import conf
 from airflow.exceptions import TaskNotFound
 from airflow.models import TaskInstance, Trigger
 from airflow.models.taskinstancehistory import TaskInstanceHistory
 from airflow.utils.log.log_reader import TaskLogReader
 
-_NDJSON_BATCH_SIZE = 500
+_NDJSON_BATCH_SIZE = conf.getint("api", "log_stream_buffer_size")
 
 task_instances_log_router = AirflowRouter(
     tags=["Task Instance"], prefix="/dags/{dag_id}/dagRuns/{dag_run_id}/taskInstances"
