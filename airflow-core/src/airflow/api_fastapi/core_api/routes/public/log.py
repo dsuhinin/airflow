@@ -161,7 +161,8 @@ def get_log(
         with contextlib.suppress(TaskNotFound):
             ti.task = dag.get_task(ti.task_id)
 
-    if accept == Mimetype.NDJSON:
+    if accept == Mimetype.NDJSON:  # only specified application/x-ndjson will return streaming response
+        # LogMetadata(TypedDict) is used as type annotation for log_reader; added ignore to suppress mypy error
         raw_stream = task_log_reader.read_log_stream(ti, try_number, metadata)  # type: ignore[arg-type]
         log_stream = _buffered_ndjson_stream(raw_stream)
         headers = None
