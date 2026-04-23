@@ -70,6 +70,7 @@
     "dagVersions": "Versão(s) do Dag",
     "dataIntervalEnd": "Fim do Intervalo de Dados",
     "dataIntervalStart": "Início do Intervalo de Dados",
+    "expectedDuration": "Duração Esperada",
     "lastSchedulingDecision": "Última Decisão de Agendamento",
     "mappedPartitionKey": "Chave de partição mapeada",
     "partitionKey": "Chave de partição",

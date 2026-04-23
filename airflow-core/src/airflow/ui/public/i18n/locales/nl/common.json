@@ -61,6 +61,7 @@
     "dagVersions": "Dag Versie(s)",
     "dataIntervalEnd": "Data interval einde",
     "dataIntervalStart": "Data interval begin",
+    "expectedDuration": "Verwachte Duur",
     "lastSchedulingDecision": "Laatste planningsbeslissing",
     "mappedPartitionKey": "Gemapte partitie sleutel",
     "partitionKey": "Partitie sleutel",

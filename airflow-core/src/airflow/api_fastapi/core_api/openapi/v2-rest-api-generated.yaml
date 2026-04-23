@@ -10885,6 +10885,11 @@ components:
           - type: string
           - type: 'null'
           title: Partition Key
+        expected_duration:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Expected Duration
       type: object
       required:
       - dag_run_id

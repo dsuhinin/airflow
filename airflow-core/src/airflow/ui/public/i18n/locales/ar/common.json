@@ -79,6 +79,7 @@
     "dagVersions": "إصدار(ات) Dag",
     "dataIntervalEnd": "نهاية فترة البيانات",
     "dataIntervalStart": "بداية فترة البيانات",
+    "expectedDuration": "المدة المتوقعة",
     "lastSchedulingDecision": "آخر قرار جدولة",
     "partitionKey": "مفتاح التقسيم",
     "queuedAt": "في الطابور في",

@@ -721,6 +721,7 @@ export type DAGRunResponse = {
     bundle_version: string | null;
     dag_display_name: string;
     partition_key: string | null;
+    expected_duration?: number | null;
 };
 
 /**

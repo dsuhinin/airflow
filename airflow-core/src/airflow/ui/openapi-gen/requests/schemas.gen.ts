@@ -2795,6 +2795,17 @@ export const $DAGRunResponse = {
                 }
             ],
             title: 'Partition Key'
+        },
+        expected_duration: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Expected Duration'
         }
     },
     type: 'object',

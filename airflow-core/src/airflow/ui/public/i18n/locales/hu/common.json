@@ -60,6 +60,7 @@
     "dagVersions": "Dag verzió(k)",
     "dataIntervalEnd": "Adatintervallum vége",
     "dataIntervalStart": "Adatintervallum kezdete",
+    "expectedDuration": "Várható Időtartam",
     "lastSchedulingDecision": "Utolsó ütemezési döntés",
     "mappedPartitionKey": "Leképezett partíciós kulcs",
     "partitionKey": "Partíciós kulcs",

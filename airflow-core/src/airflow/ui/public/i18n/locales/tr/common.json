@@ -60,6 +60,7 @@
     "dagVersions": "Dag Versiyonu(ları)",
     "dataIntervalEnd": "Veri Aralığı Sonu",
     "dataIntervalStart": "Veri Aralığı Başlangıcı",
+    "expectedDuration": "Beklenen Süre",
     "lastSchedulingDecision": "Son Zamanlama Kararı",
     "mappedPartitionKey": "Haritalanmış Bölüm Anahtarı",
     "partitionKey": "Bölüm Anahtarı",

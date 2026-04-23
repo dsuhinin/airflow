@@ -25,7 +25,7 @@ from fastapi import Depends, HTTPException, Query, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import StreamingResponse
 from pydantic import ValidationError
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import joinedload
 
 from airflow.api.common.mark_tasks import (
@@ -119,7 +119,16 @@ def get_dag_run(dag_id: str, dag_run_id: str, session: SessionDep) -> DAGRunResp
             f"The DagRun with dag_id: `{dag_id}` and run_id: `{dag_run_id}` was not found",
         )
 
-    return dag_run
+    expected_duration = session.scalar(
+        select(func.avg(DagRun.duration.expression)).where(  # type: ignore[attr-defined]
+            DagRun.dag_id == dag_id,
+            DagRun.state.in_([DagRunState.SUCCESS, DagRunState.FAILED]),
+        )
+    )
+
+    response = DAGRunResponse.model_validate(dag_run)
+    response.expected_duration = expected_duration
+    return response
 
 
 @dag_run_router.delete(

@@ -71,6 +71,7 @@
     "dagVersions": "Wersje Daga",
     "dataIntervalEnd": "Koniec interwału danych",
     "dataIntervalStart": "Początek interwału danych",
+    "expectedDuration": "Oczekiwany Czas Trwania",
     "lastSchedulingDecision": "Ostatnia decyzja harmonogramu",
     "mappedPartitionKey": "Zmapowany klucz partycji",
     "partitionKey": "Klucz partycji",

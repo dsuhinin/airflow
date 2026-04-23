@@ -61,6 +61,7 @@
     "dagVersions": "Dag Version(s)",
     "dataIntervalEnd": "Data Interval End",
     "dataIntervalStart": "Data Interval Start",
+    "expectedDuration": "Expected Duration",
     "lastSchedulingDecision": "Last Scheduling Decision",
     "mappedPartitionKey": "Mapped Partition key",
     "partitionKey": "Partition key",

@@ -27,7 +27,7 @@ import { RunTypeIcon } from "src/components/RunTypeIcon";
 import { StateBadge } from "src/components/StateBadge";
 import Time from "src/components/Time";
 import { ClipboardRoot, ClipboardIconButton } from "src/components/ui";
-import { getDuration, isStatePending, useAutoRefresh } from "src/utils";
+import { getDuration, isStatePending, renderDuration, useAutoRefresh } from "src/utils";
 
 export const Details = () => {
   const { t: translate } = useTranslation(["common", "components"]);
@@ -83,6 +83,10 @@ export const Details = () => {
         <Table.Row>
           <Table.Cell>{translate("duration")}</Table.Cell>
           <Table.Cell>{getDuration(dagRun.start_date, dagRun.end_date)}</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>{translate("dagRun.expectedDuration")}</Table.Cell>
+          <Table.Cell>{renderDuration(dagRun.expected_duration)}</Table.Cell>
         </Table.Row>
         <Table.Row>
           <Table.Cell>{translate("dagRun.lastSchedulingDecision")}</Table.Cell>

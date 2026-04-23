@@ -59,6 +59,7 @@
     "dagVersions": "Έκδοση(εις) Dag",
     "dataIntervalEnd": "Τέλος Διαστήματος Δεδομένων",
     "dataIntervalStart": "Έναρξη Διαστήματος Δεδομένων",
+    "expectedDuration": "Αναμενόμενη Διάρκεια",
     "lastSchedulingDecision": "Τελευταία Απόφαση Προγραμματισμού",
     "queuedAt": "Σε Ουρά Στις",
     "runAfter": "Εκτέλεση Μετά",
