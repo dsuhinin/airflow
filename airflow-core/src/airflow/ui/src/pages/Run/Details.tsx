@@ -20,7 +20,7 @@ import { Flex, HStack, StackSeparator, Table, Text, VStack } from "@chakra-ui/re
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import { useDagRunServiceGetDagRun } from "openapi/queries";
+import { useDagRunServiceGetDagRun, useDagRunServiceGetDagRunStats } from "openapi/queries";
 import { DagVersionDetails } from "src/components/DagVersionDetails";
 import RenderedJsonField from "src/components/RenderedJsonField";
 import { RunTypeIcon } from "src/components/RunTypeIcon";
@@ -43,6 +43,8 @@ export const Details = () => {
     undefined,
     { refetchInterval: (query) => (isStatePending(query.state.data?.state) ? refetchInterval : false) },
   );
+
+  const { data: dagDugRunStats } = useDagRunServiceGetDagRunStats({ dagId, dagRunId: runId });
 
   if (!dagRun) {
     return undefined;
@@ -84,10 +86,35 @@ export const Details = () => {
           <Table.Cell>{translate("duration")}</Table.Cell>
           <Table.Cell>{getDuration(dagRun.start_date, dagRun.end_date)}</Table.Cell>
         </Table.Row>
-        <Table.Row>
-          <Table.Cell>{translate("dagRun.expectedDuration")}</Table.Cell>
-          <Table.Cell>{renderDuration(dagRun.expected_duration)}</Table.Cell>
-        </Table.Row>
+        {dagDugRunStats?.duration ? (
+          <Table.Row>
+            <Table.Cell>{translate("dagRun.expectedDuration")}</Table.Cell>
+            <Table.Cell>
+              <VStack align="start" gap={1}>
+                <Text>
+                  {translate("dagRun.durationStats.mean")}: {renderDuration(dagDugRunStats.duration.mean)}
+                </Text>
+                {dagDugRunStats.duration.mode !== null && (
+                  <Text>
+                    {translate("dagRun.durationStats.mode")}: {renderDuration(dagDugRunStats.duration.mode)}
+                  </Text>
+                )}
+                <Text>
+                  {translate("dagRun.durationStats.p50")}: {renderDuration(dagDugRunStats.duration.p50)}
+                </Text>
+                <Text>
+                  {translate("dagRun.durationStats.p90")}: {renderDuration(dagDugRunStats.duration.p90)}
+                </Text>
+                <Text>
+                  {translate("dagRun.durationStats.p95")}: {renderDuration(dagDugRunStats.duration.p95)}
+                </Text>
+                <Text>
+                  {translate("dagRun.durationStats.p99")}: {renderDuration(dagDugRunStats.duration.p99)}
+                </Text>
+              </VStack>
+            </Table.Cell>
+          </Table.Row>
+        ) : undefined}
         <Table.Row>
           <Table.Cell>{translate("dagRun.lastSchedulingDecision")}</Table.Cell>
           <Table.Cell>

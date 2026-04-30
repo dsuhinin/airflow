@@ -69,6 +69,14 @@
     "dagVersions": "Versioni del Dag",
     "dataIntervalEnd": "Data Intervallo Fine",
     "dataIntervalStart": "Data Intervallo Inizio",
+    "durationStats": {
+      "mean": "Media",
+      "mode": "Moda",
+      "p50": "P50",
+      "p90": "P90",
+      "p95": "P95",
+      "p99": "P99"
+    },
     "expectedDuration": "Durata Prevista",
     "lastSchedulingDecision": "Ultima Decisione di Programmazione",
     "queuedAt": "In Coda il",

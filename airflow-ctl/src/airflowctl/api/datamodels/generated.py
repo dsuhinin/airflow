@@ -477,6 +477,19 @@ class DryRunBackfillResponse(BaseModel):
     partition_date: Annotated[datetime | None, Field(title="Partition Date")] = None
 
 
+class DurationStats(BaseModel):
+    """
+    Duration statistics for a DAG across historical runs.
+    """
+
+    mean: Annotated[float, Field(title="Mean")]
+    mode: Annotated[float | None, Field(title="Mode")] = None
+    p50: Annotated[float, Field(title="P50")]
+    p90: Annotated[float, Field(title="P90")]
+    p95: Annotated[float, Field(title="P95")]
+    p99: Annotated[float, Field(title="P99")]
+
+
 class EventLogResponse(BaseModel):
     """
     Event Log Response.
@@ -1524,7 +1537,6 @@ class DAGRunResponse(BaseModel):
     bundle_version: Annotated[str | None, Field(title="Bundle Version")] = None
     dag_display_name: Annotated[str, Field(title="Dag Display Name")]
     partition_key: Annotated[str | None, Field(title="Partition Key")] = None
-    expected_duration: Annotated[float | None, Field(title="Expected Duration")] = None
 
 
 class DAGRunsBatchBody(BaseModel):
@@ -1582,6 +1594,14 @@ class DAGWarningResponse(BaseModel):
     message: Annotated[str, Field(title="Message")]
     timestamp: Annotated[datetime, Field(title="Timestamp")]
     dag_display_name: Annotated[str, Field(title="Dag Display Name")]
+
+
+class DagRunStatsResponse(BaseModel):
+    """
+    DAG Run statistics serializer for responses.
+    """
+
+    duration: DurationStats | None = None
 
 
 class DagStatsResponse(BaseModel):

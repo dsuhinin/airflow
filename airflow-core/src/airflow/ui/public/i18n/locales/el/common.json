@@ -59,6 +59,14 @@
     "dagVersions": "Έκδοση(εις) Dag",
     "dataIntervalEnd": "Τέλος Διαστήματος Δεδομένων",
     "dataIntervalStart": "Έναρξη Διαστήματος Δεδομένων",
+    "durationStats": {
+      "mean": "Μέσος Όρος",
+      "mode": "Επικρατούσα Τιμή",
+      "p50": "P50",
+      "p90": "P90",
+      "p95": "P95",
+      "p99": "P99"
+    },
     "expectedDuration": "Αναμενόμενη Διάρκεια",
     "lastSchedulingDecision": "Τελευταία Απόφαση Προγραμματισμού",
     "queuedAt": "Σε Ουρά Στις",

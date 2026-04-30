@@ -133,6 +133,13 @@ export const UseDagRunServiceGetDagRunKeyFn = ({ dagId, dagRunId }: {
   dagId: string;
   dagRunId: string;
 }, queryKey?: Array<unknown>) => [useDagRunServiceGetDagRunKey, ...(queryKey ?? [{ dagId, dagRunId }])];
+export type DagRunServiceGetDagRunStatsDefaultResponse = Awaited<ReturnType<typeof DagRunService.getDagRunStats>>;
+export type DagRunServiceGetDagRunStatsQueryResult<TData = DagRunServiceGetDagRunStatsDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
+export const useDagRunServiceGetDagRunStatsKey = "DagRunServiceGetDagRunStats";
+export const UseDagRunServiceGetDagRunStatsKeyFn = ({ dagId, dagRunId }: {
+  dagId: string;
+  dagRunId: string;
+}, queryKey?: Array<unknown>) => [useDagRunServiceGetDagRunStatsKey, ...(queryKey ?? [{ dagId, dagRunId }])];
 export type DagRunServiceGetUpstreamAssetEventsDefaultResponse = Awaited<ReturnType<typeof DagRunService.getUpstreamAssetEvents>>;
 export type DagRunServiceGetUpstreamAssetEventsQueryResult<TData = DagRunServiceGetUpstreamAssetEventsDefaultResponse, TError = unknown> = UseQueryResult<TData, TError>;
 export const useDagRunServiceGetUpstreamAssetEventsKey = "DagRunServiceGetUpstreamAssetEvents";

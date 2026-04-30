@@ -25,7 +25,7 @@ from fastapi import Depends, HTTPException, Query, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import StreamingResponse
 from pydantic import ValidationError
-from sqlalchemy import func, select
+from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 
 from airflow.api.common.mark_tasks import (
@@ -72,6 +72,7 @@ from airflow.api_fastapi.core_api.datamodels.dag_run import (
     DAGRunPatchStates,
     DAGRunResponse,
     DAGRunsBatchBody,
+    DagRunStatsResponse,
     TriggerDAGRunPostBody,
 )
 from airflow.api_fastapi.core_api.datamodels.task_instances import (
@@ -86,7 +87,7 @@ from airflow.api_fastapi.core_api.security import (
     requires_access_asset,
     requires_access_dag,
 )
-from airflow.api_fastapi.core_api.services.public.dag_run import DagRunWaiter
+from airflow.api_fastapi.core_api.services.public.dag_run import DagRunWaiter, compute_duration_stats
 from airflow.api_fastapi.logging.decorators import action_logging
 from airflow.listeners.listener import get_listener_manager
 from airflow.models import DagModel, DagRun
@@ -118,17 +119,34 @@ def get_dag_run(dag_id: str, dag_run_id: str, session: SessionDep) -> DAGRunResp
             status.HTTP_404_NOT_FOUND,
             f"The DagRun with dag_id: `{dag_id}` and run_id: `{dag_run_id}` was not found",
         )
+    return dag_run
 
-    expected_duration = session.scalar(
-        select(func.avg(DagRun.duration.expression)).where(  # type: ignore[attr-defined]
-            DagRun.dag_id == dag_id,
-            DagRun.state.in_([DagRunState.SUCCESS, DagRunState.FAILED]),
+
+@dag_run_router.get(
+    "/{dag_run_id}/stats",
+    responses=create_openapi_http_exception_doc([status.HTTP_404_NOT_FOUND]),
+    dependencies=[Depends(requires_access_dag(method="GET", access_entity=DagAccessEntity.RUN))],
+)
+def get_dag_run_stats(dag_id: str, dag_run_id: str, session: SessionDep) -> DagRunStatsResponse:
+    """Get duration statistics for a DAG based on its historical completed runs."""
+    if not session.scalar(select(DagRun.id).filter_by(dag_id=dag_id, run_id=dag_run_id)):
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            f"The DagRun with dag_id: `{dag_id}` and run_id: `{dag_run_id}` was not found",
         )
-    )
 
-    response = DAGRunResponse.model_validate(dag_run)
-    response.expected_duration = expected_duration
-    return response
+    durations = [
+        d
+        for d in session.scalars(
+            select(DagRun.duration.expression).where(  # type: ignore[attr-defined]
+                DagRun.dag_id == dag_id,
+                DagRun.state.in_([DagRunState.SUCCESS, DagRunState.FAILED]),
+            )
+        )
+        if d is not None
+    ]
+
+    return DagRunStatsResponse(duration=compute_duration_stats(durations))
 
 
 @dag_run_router.delete(

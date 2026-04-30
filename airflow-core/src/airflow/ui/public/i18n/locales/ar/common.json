@@ -79,6 +79,14 @@
     "dagVersions": "إصدار(ات) Dag",
     "dataIntervalEnd": "نهاية فترة البيانات",
     "dataIntervalStart": "بداية فترة البيانات",
+    "durationStats": {
+      "mean": "المتوسط",
+      "mode": "المنوال",
+      "p50": "P50",
+      "p90": "P90",
+      "p95": "P95",
+      "p99": "P99"
+    },
     "expectedDuration": "المدة المتوقعة",
     "lastSchedulingDecision": "آخر قرار جدولة",
     "partitionKey": "مفتاح التقسيم",

@@ -721,7 +721,6 @@ export type DAGRunResponse = {
     bundle_version: string | null;
     dag_display_name: string;
     partition_key: string | null;
-    expected_duration?: number | null;
 };
 
 /**
@@ -834,6 +833,13 @@ export type DagRunAssetReference = {
 export type DagRunState = 'queued' | 'running' | 'success' | 'failed';
 
 /**
+ * DAG Run statistics serializer for responses.
+ */
+export type DagRunStatsResponse = {
+    duration: DurationStats | null;
+};
+
+/**
  * Class with TriggeredBy types for DagRun.
  */
 export type DagRunTriggeredByType = 'cli' | 'operator' | 'rest_api' | 'ui' | 'test' | 'timetable' | 'asset' | 'backfill';
@@ -923,6 +929,18 @@ export type DryRunBackfillResponse = {
     logical_date: string | null;
     partition_key: string | null;
     partition_date: string | null;
+};
+
+/**
+ * Duration statistics for a DAG across historical runs.
+ */
+export type DurationStats = {
+    mean: number;
+    mode: number | null;
+    p50: number;
+    p90: number;
+    p95: number;
+    p99: number;
 };
 
 /**
@@ -2625,6 +2643,13 @@ export type PatchDagRunData = {
 };
 
 export type PatchDagRunResponse = DAGRunResponse;
+
+export type GetDagRunStatsData = {
+    dagId: string;
+    dagRunId: string;
+};
+
+export type GetDagRunStatsResponse = DagRunStatsResponse;
 
 export type GetUpstreamAssetEventsData = {
     dagId: string;
@@ -4709,6 +4734,33 @@ export type $OpenApiTs = {
                  * Bad Request
                  */
                 400: HTTPExceptionResponse;
+                /**
+                 * Unauthorized
+                 */
+                401: HTTPExceptionResponse;
+                /**
+                 * Forbidden
+                 */
+                403: HTTPExceptionResponse;
+                /**
+                 * Not Found
+                 */
+                404: HTTPExceptionResponse;
+                /**
+                 * Validation Error
+                 */
+                422: HTTPValidationError;
+            };
+        };
+    };
+    '/api/v2/dags/{dag_id}/dagRuns/{dag_run_id}/stats': {
+        get: {
+            req: GetDagRunStatsData;
+            res: {
+                /**
+                 * Successful Response
+                 */
+                200: DagRunStatsResponse;
                 /**
                  * Unauthorized
                  */

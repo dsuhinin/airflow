@@ -73,6 +73,23 @@ class DAGRunClearBody(StrictBaseModel):
         return data
 
 
+class DurationStats(BaseModel):
+    """Duration statistics for a DAG across historical runs."""
+
+    mean: float
+    mode: float | None
+    p50: float
+    p90: float
+    p95: float
+    p99: float
+
+
+class DagRunStatsResponse(BaseModel):
+    """DAG Run statistics serializer for responses."""
+
+    duration: DurationStats | None
+
+
 class DAGRunResponse(BaseModel):
     """DAG Run serializer for responses."""
 
@@ -97,7 +114,6 @@ class DAGRunResponse(BaseModel):
     bundle_version: str | None
     dag_display_name: str = Field(validation_alias=AliasPath("dag_model", "dag_display_name"))
     partition_key: str | None
-    expected_duration: float | None = None
 
 
 class DAGRunCollectionResponse(BaseModel):

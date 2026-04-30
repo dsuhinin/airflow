@@ -70,6 +70,14 @@
     "dagVersions": "Versão(s) do Dag",
     "dataIntervalEnd": "Fim do Intervalo de Dados",
     "dataIntervalStart": "Início do Intervalo de Dados",
+    "durationStats": {
+      "mean": "Média",
+      "mode": "Moda",
+      "p50": "P50",
+      "p90": "P90",
+      "p95": "P95",
+      "p99": "P99"
+    },
     "expectedDuration": "Duração Esperada",
     "lastSchedulingDecision": "Última Decisão de Agendamento",
     "mappedPartitionKey": "Chave de partição mapeada",
