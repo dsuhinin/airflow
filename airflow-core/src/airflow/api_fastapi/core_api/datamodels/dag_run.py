@@ -73,23 +73,6 @@ class DAGRunClearBody(StrictBaseModel):
         return data
 
 
-class DurationStats(BaseModel):
-    """Duration statistics for a DAG across historical runs."""
-
-    mean: float
-    mode: float | None
-    p50: float
-    p90: float
-    p95: float
-    p99: float
-
-
-class DagRunStatsResponse(BaseModel):
-    """DAG Run statistics serializer for responses."""
-
-    duration: DurationStats | None
-
-
 class DAGRunResponse(BaseModel):
     """DAG Run serializer for responses."""
 

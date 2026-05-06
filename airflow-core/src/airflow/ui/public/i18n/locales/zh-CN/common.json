@@ -62,11 +62,7 @@
     "dataIntervalStart": "数据区间起始",
     "durationStats": {
       "mean": "平均值",
-      "mode": "众数",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "众数"
     },
     "expectedDuration": "预计耗时",
     "lastSchedulingDecision": "最后调度决策",

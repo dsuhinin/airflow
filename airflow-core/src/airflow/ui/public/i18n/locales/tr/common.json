@@ -62,11 +62,7 @@
     "dataIntervalStart": "Veri Aralığı Başlangıcı",
     "durationStats": {
       "mean": "Ortalama",
-      "mode": "Tepe Değer",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "Tepe Değer"
     },
     "expectedDuration": "Beklenen Süre",
     "lastSchedulingDecision": "Son Zamanlama Kararı",

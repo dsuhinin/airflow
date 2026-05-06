@@ -73,11 +73,7 @@
     "dataIntervalStart": "Początek interwału danych",
     "durationStats": {
       "mean": "Średnia",
-      "mode": "Dominanta",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "Dominanta"
     },
     "expectedDuration": "Oczekiwany Czas Trwania",
     "lastSchedulingDecision": "Ostatnia decyzja harmonogramu",

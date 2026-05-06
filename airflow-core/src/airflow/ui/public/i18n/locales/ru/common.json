@@ -62,11 +62,7 @@
     "dataIntervalStart": "Начало временного интервала",
     "durationStats": {
       "mean": "Среднее",
-      "mode": "Мода",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "Мода"
     },
     "expectedDuration": "Ожидаемая Длительность",
     "lastSchedulingDecision": "Последнее решение о расписании",

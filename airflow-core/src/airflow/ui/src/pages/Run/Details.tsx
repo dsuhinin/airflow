@@ -44,7 +44,7 @@ export const Details = () => {
     { refetchInterval: (query) => (isStatePending(query.state.data?.state) ? refetchInterval : false) },
   );
 
-  const { data: dagDugRunStats } = useDagRunServiceGetDagRunStats({ dagId, dagRunId: runId });
+  const { data: dagRunStats } = useDagRunServiceGetDagRunStats({ dagId, dagRunId: runId });
 
   if (!dagRun) {
     return undefined;
@@ -86,31 +86,25 @@ export const Details = () => {
           <Table.Cell>{translate("duration")}</Table.Cell>
           <Table.Cell>{getDuration(dagRun.start_date, dagRun.end_date)}</Table.Cell>
         </Table.Row>
-        {dagDugRunStats?.duration ? (
+        {dagRunStats?.duration ? (
           <Table.Row>
             <Table.Cell>{translate("dagRun.expectedDuration")}</Table.Cell>
             <Table.Cell>
               <VStack align="start" gap={1}>
                 <Text>
-                  {translate("dagRun.durationStats.mean")}: {renderDuration(dagDugRunStats.duration.mean)}
+                  {translate("dagRun.durationStats.mean")}: {renderDuration(dagRunStats.duration.mean)}
                 </Text>
-                {dagDugRunStats.duration.mode !== null && (
+                {dagRunStats.duration.mode !== null && (
                   <Text>
-                    {translate("dagRun.durationStats.mode")}: {renderDuration(dagDugRunStats.duration.mode)}
+                    {translate("dagRun.durationStats.mode")}: {renderDuration(dagRunStats.duration.mode)}
                   </Text>
                 )}
-                <Text>
-                  {translate("dagRun.durationStats.p50")}: {renderDuration(dagDugRunStats.duration.p50)}
-                </Text>
-                <Text>
-                  {translate("dagRun.durationStats.p90")}: {renderDuration(dagDugRunStats.duration.p90)}
-                </Text>
-                <Text>
-                  {translate("dagRun.durationStats.p95")}: {renderDuration(dagDugRunStats.duration.p95)}
-                </Text>
-                <Text>
-                  {translate("dagRun.durationStats.p99")}: {renderDuration(dagDugRunStats.duration.p99)}
-                </Text>
+                {/* eslint-disable i18next/no-literal-string -- P-values are technical abbreviations not subject to translation */}
+                <Text>P50: {renderDuration(dagRunStats.duration.p50)}</Text>
+                <Text>P90: {renderDuration(dagRunStats.duration.p90)}</Text>
+                <Text>P95: {renderDuration(dagRunStats.duration.p95)}</Text>
+                <Text>P99: {renderDuration(dagRunStats.duration.p99)}</Text>
+                {/* eslint-enable i18next/no-literal-string */}
               </VStack>
             </Table.Cell>
           </Table.Row>

@@ -21,14 +21,11 @@ import asyncio
 import itertools
 import json
 import operator
-import statistics
-from collections import Counter
 from typing import TYPE_CHECKING, Any
 
 import attrs
 from sqlalchemy import select
 
-from airflow.api_fastapi.core_api.datamodels.dag_run import DurationStats
 from airflow.models.dagrun import DagRun
 from airflow.models.xcom import XCOM_RETURN_KEY, XComModel
 from airflow.utils.session import create_session_async
@@ -36,42 +33,6 @@ from airflow.utils.state import State
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator, Iterator
-
-
-def compute_duration_stats(durations: list[float]) -> DurationStats | None:
-    """
-    Compute duration statistics from a list of completed DAG run durations (in seconds).
-
-    Returns None when the list is empty (no completed runs exist yet).
-    Mode is computed on second-rounded values to avoid float precision noise; returns None
-    when every run has a unique duration.
-    Percentiles use linear interpolation between adjacent sorted values.
-    """
-    if not durations:
-        return None
-
-    sorted_d = sorted(durations)
-
-    counts = Counter(round(d) for d in sorted_d)
-    max_count = max(counts.values())
-    mode_val: float | None = (
-        float(min(k for k, v in counts.items() if v == max_count)) if max_count > 1 else None
-    )
-
-    def _percentile(p: float) -> float:
-        idx = (len(sorted_d) - 1) * p / 100
-        lo = int(idx)
-        hi = min(lo + 1, len(sorted_d) - 1)
-        return sorted_d[lo] + (sorted_d[hi] - sorted_d[lo]) * (idx - lo)
-
-    return DurationStats(
-        mean=statistics.mean(sorted_d),
-        mode=mode_val,
-        p50=_percentile(50),
-        p90=_percentile(90),
-        p95=_percentile(95),
-        p99=_percentile(99),
-    )
 
 
 @attrs.define

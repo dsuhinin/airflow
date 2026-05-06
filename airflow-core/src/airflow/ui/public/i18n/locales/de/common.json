@@ -63,13 +63,9 @@
     "dataIntervalStart": "Datenintervall Start",
     "durationStats": {
       "mean": "Mittelwert",
-      "mode": "Modus",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "Modus"
     },
-    "expectedDuration": "Erwartete Dauer",
+    "expectedDuration": "Erwartete mittlere Laufzeit",
     "lastSchedulingDecision": "Letzte Planungsentscheidung",
     "mappedPartitionKey": "Zugeordneter Partitionsschlüssel",
     "partitionKey": "Partitionsschlüssel",

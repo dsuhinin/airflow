@@ -81,11 +81,7 @@
     "dataIntervalStart": "بداية فترة البيانات",
     "durationStats": {
       "mean": "المتوسط",
-      "mode": "المنوال",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "المنوال"
     },
     "expectedDuration": "المدة المتوقعة",
     "lastSchedulingDecision": "آخر قرار جدولة",

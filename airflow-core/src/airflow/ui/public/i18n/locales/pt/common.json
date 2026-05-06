@@ -72,11 +72,7 @@
     "dataIntervalStart": "Início do Intervalo de Dados",
     "durationStats": {
       "mean": "Média",
-      "mode": "Moda",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "Moda"
     },
     "expectedDuration": "Duração Esperada",
     "lastSchedulingDecision": "Última Decisão de Agendamento",

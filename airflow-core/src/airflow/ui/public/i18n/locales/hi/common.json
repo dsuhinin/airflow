@@ -62,11 +62,7 @@
     "dataIntervalStart": "डेटा अंतराल प्रारंभ",
     "durationStats": {
       "mean": "माध्य",
-      "mode": "बहुलक",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "बहुलक"
     },
     "expectedDuration": "अपेक्षित अवधि",
     "lastSchedulingDecision": "अंतिम शेड्यूलिंग निर्णय",

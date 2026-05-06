@@ -62,11 +62,7 @@
     "dataIntervalStart": "Adatintervallum kezdete",
     "durationStats": {
       "mean": "Átlag",
-      "mode": "Módusz",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "Módusz"
     },
     "expectedDuration": "Várható Időtartam",
     "lastSchedulingDecision": "Utolsó ütemezési döntés",

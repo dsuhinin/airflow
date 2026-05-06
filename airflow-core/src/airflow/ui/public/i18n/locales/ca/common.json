@@ -63,11 +63,7 @@
     "dataIntervalStart": "Inici de l'interval de dades",
     "durationStats": {
       "mean": "Mitjana",
-      "mode": "Moda",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "Moda"
     },
     "expectedDuration": "Durada esperada",
     "lastSchedulingDecision": "Última decisió de programació",

@@ -61,11 +61,7 @@
     "dataIntervalStart": "เริ่มต้นช่วงข้อมูล",
     "durationStats": {
       "mean": "ค่าเฉลี่ย",
-      "mode": "ฐานนิยม",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "ฐานนิยม"
     },
     "expectedDuration": "ระยะเวลาที่คาดหวัง",
     "lastSchedulingDecision": "การตัดสินใจกำหนดเวลาล่าสุด",

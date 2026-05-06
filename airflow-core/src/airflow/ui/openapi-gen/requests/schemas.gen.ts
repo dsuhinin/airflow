@@ -3412,25 +3412,6 @@ so please ensure that their values always match the ones with the
 same name in TaskInstanceState.`
 } as const;
 
-export const $DagRunStatsResponse = {
-    properties: {
-        duration: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/DurationStats'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        }
-    },
-    type: 'object',
-    required: ['duration'],
-    title: 'DagRunStatsResponse',
-    description: 'DAG Run statistics serializer for responses.'
-} as const;
-
 export const $DagRunTriggeredByType = {
     type: 'string',
     enum: ['cli', 'operator', 'rest_api', 'ui', 'test', 'timetable', 'asset', 'backfill'],
@@ -3686,46 +3667,6 @@ export const $DryRunBackfillResponse = {
     required: ['logical_date', 'partition_key', 'partition_date'],
     title: 'DryRunBackfillResponse',
     description: 'Backfill serializer for responses in dry-run mode.'
-} as const;
-
-export const $DurationStats = {
-    properties: {
-        mean: {
-            type: 'number',
-            title: 'Mean'
-        },
-        mode: {
-            anyOf: [
-                {
-                    type: 'number'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Mode'
-        },
-        p50: {
-            type: 'number',
-            title: 'P50'
-        },
-        p90: {
-            type: 'number',
-            title: 'P90'
-        },
-        p95: {
-            type: 'number',
-            title: 'P95'
-        },
-        p99: {
-            type: 'number',
-            title: 'P99'
-        }
-    },
-    type: 'object',
-    required: ['mean', 'mode', 'p50', 'p90', 'p95', 'p99'],
-    title: 'DurationStats',
-    description: 'Duration statistics for a DAG across historical runs.'
 } as const;
 
 export const $EventLogCollectionResponse = {
@@ -8156,6 +8097,25 @@ export const $DAGWithLatestDagRunsResponse = {
     description: 'DAG with latest dag runs response serializer.'
 } as const;
 
+export const $DagRunStatsResponse = {
+    properties: {
+        duration: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/DurationStats'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        }
+    },
+    type: 'object',
+    required: ['duration'],
+    title: 'DagRunStatsResponse',
+    description: 'DAG Run statistics serializer for responses.'
+} as const;
+
 export const $DashboardDagStatsResponse = {
     properties: {
         active_dag_count: {
@@ -8317,6 +8277,46 @@ export const $DeadlineResponse = {
     required: ['id', 'deadline_time', 'missed', 'created_at', 'dag_id', 'dag_run_id'],
     title: 'DeadlineResponse',
     description: 'Deadline serializer for responses.'
+} as const;
+
+export const $DurationStats = {
+    properties: {
+        mean: {
+            type: 'number',
+            title: 'Mean'
+        },
+        mode: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Mode'
+        },
+        p50: {
+            type: 'number',
+            title: 'P50'
+        },
+        p90: {
+            type: 'number',
+            title: 'P90'
+        },
+        p95: {
+            type: 'number',
+            title: 'P95'
+        },
+        p99: {
+            type: 'number',
+            title: 'P99'
+        }
+    },
+    type: 'object',
+    required: ['mean', 'mode', 'p50', 'p90', 'p95', 'p99'],
+    title: 'DurationStats',
+    description: 'Duration statistics for a DAG across historical runs.'
 } as const;
 
 export const $EdgeResponse = {

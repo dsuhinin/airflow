@@ -66,11 +66,7 @@
     "dataIntervalStart": "תחילת מקטע נתונים",
     "durationStats": {
       "mean": "ממוצע",
-      "mode": "שכיח",
-      "p50": "P50",
-      "p90": "P90",
-      "p95": "P95",
-      "p99": "P99"
+      "mode": "שכיח"
     },
     "expectedDuration": "משך זמן צפוי",
     "lastSchedulingDecision": "החלטת תזמון אחרונה",
