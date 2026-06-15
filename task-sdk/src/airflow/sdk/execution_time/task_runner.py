@@ -138,7 +138,6 @@ from airflow.sdk.execution_time.context import (
 from airflow.sdk.execution_time.sentry import Sentry
 from airflow.sdk.execution_time.xcom import XCom
 from airflow.sdk.listener import get_listener_manager
-from airflow.sdk.observability.metrics import stats_utils
 from airflow.sdk.serde import allow_class, iter_pydantic_models
 from airflow.sdk.state import TaskScope
 from airflow.sdk.timezone import coerce_datetime
@@ -2184,10 +2183,10 @@ def main():
     global SUPERVISOR_COMMS
     SUPERVISOR_COMMS = CommsDecoder[ToTask, ToSupervisor](log=log)
 
-    stats.initialize(
-        factory=stats_utils.get_stats_factory(),
-        export_legacy_names=conf.getboolean("metrics", "legacy_names_on"),
-    )
+    # stats.initialize(
+    #     factory=stats_utils.get_stats_factory(),
+    #     export_legacy_names=conf.getboolean("metrics", "legacy_names_on"),
+    # )
 
     stack = ExitStack()
     span = INVALID_SPAN

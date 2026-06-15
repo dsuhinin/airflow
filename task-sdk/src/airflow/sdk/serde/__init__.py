@@ -43,7 +43,6 @@ from airflow.sdk._shared.serialization import (
     VERSION,
 )
 from airflow.sdk.configuration import conf
-from airflow.sdk.observability.metrics import stats_utils
 from airflow.sdk.serde.typing import is_pydantic_model
 
 if TYPE_CHECKING:
@@ -465,10 +464,10 @@ def _register():
     _deserializers.clear()
     _stringifiers.clear()
 
-    stats.initialize(
-        factory=stats_utils.get_stats_factory(),
-        export_legacy_names=conf.getboolean("metrics", "legacy_names_on"),
-    )
+    # stats.initialize(
+    #     factory=stats_utils.get_stats_factory(),
+    #     export_legacy_names=conf.getboolean("metrics", "legacy_names_on"),
+    # )
 
     with stats.timer("serde.load_serializers") as timer:
         serializers_module = import_module("airflow.sdk.serde.serializers")

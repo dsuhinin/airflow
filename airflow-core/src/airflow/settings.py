@@ -39,7 +39,9 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+from airflow._shared.observability.metrics import stats
 from airflow._shared.observability.traces import configure_otel
+from airflow.observability.metrics import stats_utils
 
 try:
     from sqlalchemy.ext.asyncio import async_sessionmaker
@@ -811,6 +813,10 @@ def initialize():
     import_local_settings()
     configure_logging()
     configure_otel(conf)
+    stats.initialize(
+        factory=stats_utils.get_stats_factory(),
+        export_legacy_names=conf.getboolean("metrics", "legacy_names_on"),
+    )
     configure_adapters()
     # The webservers import this file from models.py with the default settings.
 
