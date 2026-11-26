@@ -18,7 +18,18 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { formatNumber } from "./formatNumber";
+import { formatCompactNumber, formatNumber } from "./formatNumber";
+
+describe("formatCompactNumber", () => {
+  it.each([
+    [765, "765"],
+    [2345, "2.3K"],
+    [345_000, "345K"],
+    [2_000_000, "2M"],
+  ])("shortens %i", (value, expected) => {
+    expect(formatCompactNumber(value, "en")).toBe(expected);
+  });
+});
 
 describe("formatNumber", () => {
   it.each([

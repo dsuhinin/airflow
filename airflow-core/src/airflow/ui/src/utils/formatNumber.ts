@@ -29,3 +29,11 @@ const numberFormatter = createIntlCache<Intl.NumberFormat>();
  */
 export const formatNumber = (value: number, locale: string): string =>
   numberFormatter("number", locale, (forLocale) => new Intl.NumberFormat(forLocale)).format(value);
+
+/** Short counter such as "2K" or "1.2M" for places too narrow for digit grouping. */
+export const formatCompactNumber = (value: number, locale: string): string =>
+  numberFormatter(
+    "compact",
+    locale,
+    (forLocale) => new Intl.NumberFormat(forLocale, { maximumFractionDigits: 1, notation: "compact" }),
+  ).format(value);

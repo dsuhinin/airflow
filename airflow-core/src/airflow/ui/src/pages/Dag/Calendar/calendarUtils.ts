@@ -45,9 +45,10 @@ const HOURLY_KEY_FORMAT = `${DATE_FORMAT}THH`;
 // Calendar color constants
 export const PLANNED_COLOR = { _dark: "stone.600", _light: "stone.500" };
 const EMPTY_COLOR = { _dark: "gray.700", _light: "gray.100" };
-const RUNNING_COLOR = { _dark: "cyan.700", _light: "cyan.400" };
 
-const TOTAL_COLOR_INTENSITIES = [
+export const RUNNING_COLOR = { _dark: "cyan.700", _light: "cyan.400" };
+
+export const TOTAL_COLOR_INTENSITIES = [
   EMPTY_COLOR, // 0
   { _dark: "green.900", _light: "green.200" },
   { _dark: "green.700", _light: "green.400" },
@@ -55,7 +56,7 @@ const TOTAL_COLOR_INTENSITIES = [
   { _dark: "green.300", _light: "green.800" },
 ];
 
-const FAILURE_COLOR_INTENSITIES = [
+export const FAILURE_COLOR_INTENSITIES = [
   EMPTY_COLOR, // 0
   { _dark: "red.900", _light: "red.200" },
   { _dark: "red.700", _light: "red.400" },

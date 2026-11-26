@@ -50,7 +50,7 @@ const loadConfigs = lazyRoute(() => import("src/pages/Configs"), "Configs");
 const loadConnections = lazyRoute(() => import("src/pages/Connections"), "Connections");
 const loadDag = lazyRoute(() => import("src/pages/Dag"), "Dag");
 const loadBackfills = lazyRoute(() => import("src/pages/Dag/Backfills"), "Backfills");
-const loadCalendar = lazyRoute(() => import("src/pages/Dag/Calendar/Calendar"), "Calendar");
+const loadCalendar = lazyRoute(() => import("src/pages/Dag/CalendarTab"), "CalendarTab");
 const loadCode = lazyRoute(() => import("src/pages/Dag/Code"), "Code");
 const loadDagDetails = lazyRoute(() => import("src/pages/Dag/Details"), "Details");
 const loadOverview = lazyRoute(() => import("src/pages/Dag/Overview"), "Overview");

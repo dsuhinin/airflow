@@ -7,8 +7,10 @@
     "title": "Dependencies Blocking Task From Getting Scheduled"
   },
   "calendar": {
+    "allStates": "All",
     "backfill": "Backfill",
     "daily": "Daily",
+    "dateField": "Date field",
     "hourly": "Hourly",
     "legend": {
       "less": "Less",
@@ -16,15 +18,30 @@
       "more": "More"
     },
     "navigation": {
+      "next": "Next period",
       "nextMonth": "Next month",
       "nextYear": "Next year",
+      "nextYears": "Next years",
+      "previous": "Previous period",
       "previousMonth": "Previous month",
-      "previousYear": "Previous year"
+      "previousYear": "Previous year",
+      "previousYears": "Previous years",
+      "selectPeriod": "Select period"
     },
     "noData": "No data available",
     "noFailedRuns": "No failed runs",
     "noRuns": "No runs",
+    "runs_one": "{{value}} Run",
+    "runs_other": "{{value}} Runs",
     "totalRuns": "Total Runs",
+    "view": "View",
+    "views": {
+      "customRange": "Custom Range",
+      "day": "Day",
+      "month": "Month",
+      "week": "Week",
+      "year": "Year"
+    },
     "week": "Week {{weekNumber}}",
     "weekdays": {
       "friday": "Fri",
