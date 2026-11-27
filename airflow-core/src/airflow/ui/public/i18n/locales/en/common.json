@@ -289,6 +289,17 @@
   "selectLanguage": "Select Language",
   "selected": "Selected",
   "settings": {
+    "calendar": {
+      "layout": {
+        "helper": "Switch between the redesigned calendar and the previous one. Temporary while the redesign is in progress.",
+        "label": "Calendar layout",
+        "options": {
+          "current": "Previous",
+          "next": "New"
+        }
+      },
+      "title": "Calendar"
+    },
     "clearing": {
       "keepTaskState": {
         "helper": "Keep task state store entries by default when clearing task instances, instead of discarding them.",

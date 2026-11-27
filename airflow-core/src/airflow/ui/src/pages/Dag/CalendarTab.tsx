@@ -19,23 +19,20 @@
 import { lazy, Suspense } from "react";
 
 import { Skeleton } from "@chakra-ui/react";
-import { useSearchParams } from "react-router-dom";
 
-import { SearchParamsKeys } from "src/constants/searchParams";
+import { useCalendarLayout } from "src/hooks/useUserSettings";
 
 import { Calendar } from "./Calendar/Calendar";
-
-const NEXT_CALENDAR_LAYOUT = "next";
 
 const CalendarNext = lazy(() =>
   import("./CalendarNext").then((module) => ({ default: module.CalendarNext })),
 );
 
-// The redesigned calendar stays behind `?calendar-layout=next` until it replaces the current one.
+// The previous calendar stays reachable through the Settings page switch until the redesign replaces it.
 export const CalendarTab = () => {
-  const [searchParams] = useSearchParams();
+  const [layout] = useCalendarLayout();
 
-  if (searchParams.get(SearchParamsKeys.CALENDAR_LAYOUT) !== NEXT_CALENDAR_LAYOUT) {
+  if (layout === "current") {
     return <Calendar />;
   }
 

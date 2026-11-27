@@ -62,7 +62,7 @@ const DATE = "&calendar-date=2026-09-16";
 
 describe("CalendarNext", () => {
   it("renders the month grid by default with sample bars linking to the runs tab", () => {
-    renderCalendar(`?calendar-layout=next${DATE}`);
+    renderCalendar("?calendar-date=2026-09-16");
 
     expect(screen.getByTestId("dag-calendar-next-root")).toBeInTheDocument();
     expect(screen.getByTestId("calendar-month-grid")).toBeInTheDocument();

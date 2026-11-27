@@ -27,6 +27,7 @@ import type { Direction } from "src/components/Graph/DirectionDropdown";
 
 import type { DefaultTaskInstanceTab } from "src/constants/tab";
 import {
+  useCalendarLayout,
   useClearKeepTaskStateDefault,
   useClearPreventRunningTaskDefault,
   useClearRunDefaultOptions,
@@ -38,6 +39,7 @@ import {
   useDefaultTaskGroupsExpanded,
   useMarkTaskInstanceDefaultOptions,
   useShowDagsListRecentTasks,
+  type CalendarLayoutOption,
   type LandingPageOption,
 } from "src/hooks/useUserSettings";
 import { useDocumentTitle } from "src/utils";
@@ -184,6 +186,7 @@ export const Settings = () => {
   const [defaultLandingPage, setDefaultLandingPage] = useDefaultLandingPage();
   const [matchAnywhere, setMatchAnywhere] = useDefaultMatchAnywhere();
   const [showRecentTasks, setShowRecentTasks] = useShowDagsListRecentTasks();
+  const [calendarLayout, setCalendarLayout] = useCalendarLayout();
 
   const taskInstanceTabOptions: Array<SelectOption<DefaultTaskInstanceTab>> = [
     { label: translate("dag:tabs.logs"), value: "logs" },
@@ -198,6 +201,11 @@ export const Settings = () => {
   const landingPageOptions: Array<SelectOption<LandingPageOption>> = [
     { label: translate("settings.general.landingPage.options.dashboard"), value: "dashboard" },
     { label: translate("settings.general.landingPage.options.dags"), value: "dags" },
+  ];
+
+  const calendarLayoutOptions: Array<SelectOption<CalendarLayoutOption>> = [
+    { label: translate("settings.calendar.layout.options.current"), value: "current" },
+    { label: translate("settings.calendar.layout.options.next"), value: "next" },
   ];
 
   const directionOptions: Array<SelectOption<Direction>> = [
@@ -287,6 +295,16 @@ export const Settings = () => {
             options={directionOptions}
             testId="default-graph-direction"
             value={graphDirection}
+          />
+        </Section>
+        <Section title={translate("settings.calendar.title")}>
+          <SelectSetting
+            helper={translate("settings.calendar.layout.helper")}
+            label={translate("settings.calendar.layout.label")}
+            onChange={setCalendarLayout}
+            options={calendarLayoutOptions}
+            testId="calendar-layout"
+            value={calendarLayout}
           />
         </Section>
         <Section title={translate("settings.clearing.title")}>

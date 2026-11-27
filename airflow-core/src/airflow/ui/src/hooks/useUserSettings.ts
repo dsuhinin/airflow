@@ -21,6 +21,7 @@ import { useLocalStorage } from "usehooks-ts";
 import type { Direction } from "src/components/Graph/DirectionDropdown";
 
 import {
+  CALENDAR_LAYOUT_KEY,
   CLEAR_KEEP_TASK_STATE_KEY,
   CLEAR_PREVENT_RUNNING_TASK_KEY,
   CLEAR_RUN_DEFAULT_OPTIONS_KEY,
@@ -37,6 +38,9 @@ import type { DefaultTaskInstanceTab } from "src/constants/tab";
 
 /** Page shown at the app root. */
 export type LandingPageOption = "dags" | "dashboard";
+
+/** Which version of the Dag calendar tab to show while the redesign is in progress. */
+export type CalendarLayoutOption = "current" | "next";
 
 /**
  * User-configurable defaults surfaced in the Settings page and consumed as
@@ -87,3 +91,5 @@ export const useDefaultLandingPage = () =>
 /** Whether the Dags list shows recent tasks; off also skips fetching them. */
 export const useShowDagsListRecentTasks = () =>
   useLocalStorage<boolean>(DAGS_LIST_SHOW_RECENT_TASKS_KEY, true);
+
+export const useCalendarLayout = () => useLocalStorage<CalendarLayoutOption>(CALENDAR_LAYOUT_KEY, "next");

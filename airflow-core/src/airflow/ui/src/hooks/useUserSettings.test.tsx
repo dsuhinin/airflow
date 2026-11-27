@@ -20,6 +20,7 @@ import { act, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
 import {
+  CALENDAR_LAYOUT_KEY,
   CLEAR_KEEP_TASK_STATE_KEY,
   CLEAR_PREVENT_RUNNING_TASK_KEY,
   CLEAR_RUN_DEFAULT_OPTIONS_KEY,
@@ -32,6 +33,7 @@ import {
 } from "src/constants/localStorage";
 
 import {
+  useCalendarLayout,
   useClearKeepTaskStateDefault,
   useClearPreventRunningTaskDefault,
   useClearRunDefaultOptions,
@@ -224,6 +226,33 @@ describe("useDefaultLandingPage", () => {
 
     expect(result.current[0]).toBe("dags");
     expect(JSON.parse(localStorage.getItem(DEFAULT_LANDING_PAGE_KEY) ?? '""')).toBe("dags");
+  });
+});
+
+describe("useCalendarLayout", () => {
+  it("defaults to the redesigned calendar when nothing is stored", () => {
+    const { result } = renderHook(() => useCalendarLayout());
+
+    expect(result.current[0]).toBe("next");
+  });
+
+  it("reads an existing stored layout", () => {
+    localStorage.setItem(CALENDAR_LAYOUT_KEY, JSON.stringify("current"));
+
+    const { result } = renderHook(() => useCalendarLayout());
+
+    expect(result.current[0]).toBe("current");
+  });
+
+  it("persists a new layout to localStorage", () => {
+    const { result } = renderHook(() => useCalendarLayout());
+
+    act(() => {
+      result.current[1]("current");
+    });
+
+    expect(result.current[0]).toBe("current");
+    expect(JSON.parse(localStorage.getItem(CALENDAR_LAYOUT_KEY) ?? '""')).toBe("current");
   });
 });
 

@@ -23,6 +23,7 @@ import { initReactI18next } from "react-i18next";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 
 import {
+  CALENDAR_LAYOUT_KEY,
   CLEAR_KEEP_TASK_STATE_KEY,
   CLEAR_PREVENT_RUNNING_TASK_KEY,
   DAGS_LIST_SHOW_RECENT_TASKS_KEY,
@@ -47,6 +48,14 @@ beforeAll(async () => {
       en: {
         common: {
           settings: {
+            calendar: {
+              layout: {
+                helper: "helper",
+                label: "Calendar layout",
+                options: { current: "CURRENT-OPT", next: "New" },
+              },
+              title: "Calendar",
+            },
             clearing: {
               keepTaskState: { helper: "helper", label: "Keep task state on clear" },
               preventRunningTask: { helper: "helper", label: "Prevent clearing running tasks" },
@@ -139,6 +148,7 @@ describe("Settings page", () => {
       "default-landing-page",
       "default-graph-direction",
       "default-task-instance-tab",
+      "calendar-layout",
       "clear-prevent-running-task",
       "clear-keep-task-state",
     ]) {
@@ -164,10 +174,12 @@ describe("Settings page", () => {
 
     localStorage.setItem(DEFAULT_TASK_INSTANCE_TAB_KEY, JSON.stringify("details"));
     localStorage.setItem(DEFAULT_LANDING_PAGE_KEY, JSON.stringify("dashboard"));
+    localStorage.setItem(CALENDAR_LAYOUT_KEY, JSON.stringify("current"));
 
     render(<Settings />, { wrapper: BaseWrapper });
 
     expect(screen.getByTestId("default-landing-page")).toHaveTextContent("DASHBOARD-OPT");
+    expect(screen.getByTestId("calendar-layout")).toHaveTextContent("CURRENT-OPT");
     expect(screen.getByTestId("default-graph-direction")).toHaveTextContent("DOWN-LABEL");
     expect(screen.getByTestId("default-task-instance-tab")).toHaveTextContent("DETAILS-TAB");
     expect(screen.getByTestId("clear-prevent-running-task")).toHaveAttribute("data-state", "unchecked");

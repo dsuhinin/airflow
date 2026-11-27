@@ -28,7 +28,6 @@ export enum SearchParamsKeys {
   CALENDAR_DATE = "calendar-date",
   CALENDAR_DATE_FIELD = "calendar-date-field",
   CALENDAR_GRANULARITY = "calendar-granularity",
-  CALENDAR_LAYOUT = "calendar-layout",
   CALENDAR_RANGE_END = "calendar-range-end",
   CALENDAR_RANGE_START = "calendar-range-start",
   CALENDAR_STATE = "calendar-state",
